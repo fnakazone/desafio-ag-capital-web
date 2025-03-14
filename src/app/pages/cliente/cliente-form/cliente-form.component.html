@@ -1,0 +1,61 @@
+<br/>
+<p-toast></p-toast>
+
+<div class="card shadow-2 pb-3 pl-3 pr-3" >
+    <p-toolbar>
+      <div class="p-toolbar-group-start">
+        <strong>Novo Cliente</strong>
+      </div>
+      <div class="p-toolbar-group-end"></div>
+    </p-toolbar>
+    <br/>
+    <p-card>
+    <form [formGroup]="formulario">
+    <div>
+    <label
+        for="nome"
+        >Nome*</label
+      >
+      <input
+      style="width: 100%"
+      class="p-inputtext"
+      id="nome"
+      formControlName="nome"
+    />
+    </div>  
+    <br>
+    <div>
+      <label
+          for="descricao"
+          >Descrição*</label
+        >
+        <input
+        style="width: 100%"
+        class="p-inputtext"
+        id="descricao"
+        formControlName="descricao"
+      />
+    </div>
+    <p style="margin-top: 15px; margin-bottom:0px; font-style: italic; font-size: 0.9em;">* Campos obrigatórios</p>
+    <p-divider />
+
+    <div class="col-12">
+      <div class="flex justify-content-between">
+        <p-button
+          label="Limpar"
+          class="br-button primary"
+        ></p-button>
+        <p-button 
+          [disabled]="formulario.invalid"
+          label="Salvar"
+          icon="fa fa-clone"
+          class="br-button primary"
+          (click)="ngSubmit()"
+        ></p-button>
+      </div>
+    </div>
+    </form>  
+    </p-card>
+  </div>
+
+

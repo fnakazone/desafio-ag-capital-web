@@ -1,0 +1,26 @@
+ .container {
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+}
+.content {
+     padding: 20px;
+    flex-grow: 1; 
+  }
+  
+  button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+  
+  .main-content {
+    transition: margin-left 0.3s ease-in-out;  
+    margin-left: 0; 
+  
+    &.shifted {
+      margin-left: 250px;  
+    }
+  }
+  

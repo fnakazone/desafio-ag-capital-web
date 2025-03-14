@@ -1,0 +1,105 @@
+.header-card {
+  margin-bottom: 20px;
+  background-color: #1976d2;  
+  color: white;               
+  padding: 16px;
+  font-size: 24px;
+}
+
+mat-card-title {
+  font-weight: bold;
+}
+
+.custom-table th.mat-header-cell {
+  background-color: #42a5f5;  
+  color: white;        
+  font-weight: bold;           
+}
+
+.custom-table {
+  width: 100%;
+  margin-top: 20px;          
+}
+
+mat-toolbar {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-table {
+  margin-bottom: 20px;
+  background-color: #1976d2;   
+  color: white;                
+  padding: 16px;
+  font-size: 24px;
+}
+
+.cabecalho {
+  background-color: #afd6ff !important;  
+  color: white !important;  
+}
+
+.registro {
+  color: rgb(0, 0, 0); 
+  background-color: rgb(255, 255, 255);
+}
+
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+  background-color: #f2f2f2;  
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;  
+  justify-content: left; 
+}
+
+.btn-visualizar {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 16px !important; /* Tamanho adequado para o ícone */
+  padding: 0 !important; /* Remove o padding extra */
+  border-radius: 50% !important; /* Torna o botão redondo */
+  display: inline-flex;
+  align-items: left;
+  justify-content: left;
+}
+.btn-editar  {
+  background-color: lightseagreen !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 16px !important; /* Tamanho adequado para o ícone */
+  padding: 0 !important; /* Remove o padding extra */
+  border-radius: 50% !important; /* Torna o botão redondo */
+  display: inline-flex;
+  align-items: left;
+  justify-content: left;
+}
+.btn-excluir  {
+  background-color: red !important;
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 16px !important; /* Tamanho adequado para o ícone */
+  padding: 0 !important; /* Remove o padding extra */
+  border-radius: 50% !important; /* Torna o botão redondo */
+  display: inline-flex;
+  align-items: left;
+  justify-content: left;
+}
+
+
+.table-container {
+  max-height: 500px;  /* Defina a altura máxima desejada para a tabela */
+  overflow-y: auto;   /* Rolagem somente para o conteúdo da tabela */
+}
+
+.p-datatable-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}

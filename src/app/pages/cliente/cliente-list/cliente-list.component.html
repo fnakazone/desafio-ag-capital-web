@@ -1,0 +1,195 @@
+<br/>
+<div class="card shadow-2 pb-3 pl-3 pr-3" >
+  <p-card header="Clientes">
+  <p-table *ngIf="listaClientes && listaClientes.length > 0; else vazio"  
+           [value]="listaClientes" class="p-datatable-striped">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 20%">Nome</th>
+        <th style="width: 35%">Descricao</th>
+        <th style="width: 35%">Qtd. Projetos</th>
+        <th style="width: 35%">Qtd. Atividades</th>
+        <th style="width: 10%">Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-cliente>
+      <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.descricao }}</td>
+        <td>{{ cliente?.projetos?.length || 0 }}</td>
+        <td>{{ getTotalAtividades(cliente) }}</td>
+        <td>          
+          <div class="action-buttons">
+            <p-button icon="pi pi-eye" class="btn-visualizar p-button-rounded p-button-text p-button-primary" pTooltip="Visualizar" tooltipPosition="top" (click)="projetos(cliente)"></p-button>
+            <p-button icon="pi pi-pencil" class="btn-editar p-button-rounded p-button-text p-button-warning" pTooltip="Editar" tooltipPosition="top" (click)="editar(cliente.id)"></p-button>
+            <p-button icon="pi pi-trash" class="btn-excluir p-button-rounded p-button-text p-button-danger" pTooltip="Excluir" tooltipPosition="top"></p-button>
+   
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-template #vazio>
+    <p>Nenhum cliente encontrado</p>
+  </ng-template>
+</p-card>
+</div>
+
+
+<p-dialog
+  header="Projeto(s)"
+  [style]="{ width: '50%' }"
+  [(visible)]="dialogProjetos"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+  <p-card>
+    <p-table [value]="listaProjetos" class="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%">Nome</th>
+          <th style="width: 35%">Descricao</th>
+          <th style="width: 10%">Status</th>
+          <th style="width: 10%">Atividade</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-projeto>
+        <tr>
+          <td>{{ projeto.nome }}</td>
+          <td>{{ projeto.descricao }}</td>
+          <td>{{ projeto?.status?.nome }}</td>
+          <td>          
+            <div class="action-buttons">
+              <p-button icon="pi pi-eye" class="btn-editar p-button-rounded p-button-text p-button-warning" pTooltip="Nova Atividade" tooltipPosition="top" (click)="atividades(projeto)"></p-button>    
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+  <p-divider></p-divider>
+  <p-button label="Fechar" pTooltip="Fechar" tooltipPosition="top" (click)="fecharDialogProjetos()"></p-button>
+
+</p-dialog>
+
+
+<p-dialog
+  header="Atividade(s)"
+  [style]="{ width: '50%', height: '720px' }"
+  [(visible)]="dialogAtividade"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+<p-card [style]="{ 'height': '500px'}"  >
+  <p-button label="Nova Atividade" pTooltip="Nova Atividade" tooltipPosition="top" (click)="novaAtividade()"></p-button>
+  <br>
+  <p-table *ngIf="listaAtividades && listaAtividades.length > 0; else vazio"  
+           [value]="listaAtividades"
+           class="p-datatable-striped"
+           [paginator]="true" 
+           [rows]="5" 
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 20%">Nome</th>
+        <th style="width: 35%">Descricao</th>
+        <th style="width: 10%">Status</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-atividade>
+      <tr>
+        <td>{{ atividade.nome }}</td>
+        <td>{{ atividade.descricao }}</td>
+        <td>{{ atividade?.status?.nome }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-template #vazio>
+    <p>Nenhuma atividade encontrada</p>
+  </ng-template>
+</p-card>
+<p-divider></p-divider>
+<p-button label="Fechar" pTooltip="Fechar" tooltipPosition="top" (click)="fecharDialogAtividades()"></p-button>
+
+</p-dialog>
+
+
+<p-dialog
+  header="Nova Atividade"
+  [style]="{ width: '50%' }"
+  [(visible)]="dialogNovaAtividade"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+<div class="card shadow-2 pb-3 pl-3 pr-3" >
+  <p-toolbar>
+    <div class="p-toolbar-group-start">
+      <strong>Nova Atividade</strong>
+    </div>
+    <div class="p-toolbar-group-end"></div>
+  </p-toolbar>
+  <br/>
+  <p-card>
+  <form [formGroup]="formularioAtividade">
+  <div>
+      <label
+        for="nome"
+        >Nome*</label
+      >
+      <input
+      style="width: 100%"
+      class="p-inputtext"
+      id="nome"
+      formControlName="nome"
+      />
+  </div>
+  <br>
+  <div>
+    <label
+        for="descricao"
+        >Descrição*</label
+      >
+      <input
+      style="width: 100%"
+      class="p-inputtext"
+      id="descricao"
+      formControlName="descricao"
+    />
+  </div>
+  <p style="margin-top: 15px; margin-bottom:0px; font-style: italic; font-size: 0.9em;">* Campos obrigatórios</p>
+  <p-divider />
+
+  <div class="col-12">
+    <div class="flex justify-content-between">
+      <p-button
+        label="Limpar"
+        class="br-button primary"
+        (click)="limparNovaAtividade()"
+      ></p-button>
+      <p-button
+        label="Cancelar"
+        class="br-button primary"
+        (click)="cancelarNovaAtividade()"
+      ></p-button>
+      <p-button
+        [disabled]="formularioAtividade.invalid"
+        label="Salvar"
+        icon="fa fa-clone"
+        class="br-button primary"
+        (click)="salvarAtividade()"
+      ></p-button>
+    </div>
+  </div>
+  </form>  
+  </p-card>
+</div>
+</p-dialog>

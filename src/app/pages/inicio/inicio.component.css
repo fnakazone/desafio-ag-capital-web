@@ -1,0 +1,21 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  }
+  
+  .welcome-card {
+    width: 500px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
