@@ -44,4 +44,10 @@ export class ClienteService {
         {headers: { authorization: `Bearer ${this._authService.getToken()}` },
       }));
   }
+
+  async delete(id: number): Promise<void> {
+    await firstValueFrom(this._http.delete<void>(`${this.URL_CLIENTE}/${id}`, {
+      headers: { authorization: `Bearer ${this._authService.getToken()}` },
+    }));
+  }
 }

@@ -259,4 +259,21 @@ describe('ClienteListComponent', () => {
     expect(component.dialogNovaAtividade).toBeTrue();
   });
 
+  it('deve definir o idClienteExclusao e abrir o diálogo de confirmação ao chamar confirmacaoExclusao()', () => {
+    const idTeste = 123;
+    
+    component.confirmacaoExclusao(idTeste);
+    
+    expect(component.idClienteExclusao).toBe(idTeste);
+    expect(component.dialogConfirmacaoExclusao).toBeTrue();
+  });
+
+  it('deve fechar o diálogo de confirmação ao chamar fecharDialogConfirmacaoExclusao()', () => {
+    component.dialogConfirmacaoExclusao = true; // Simula o diálogo aberto
+    
+    component.fecharDialogConfirmacaoExclusao();
+    
+    expect(component.dialogConfirmacaoExclusao).toBeFalse();
+  });
+
 });

@@ -86,6 +86,7 @@ export class ClienteFormComponent implements OnInit {
   }
 
   setCreate() {
+    console.log("setCreate: ",JSON.stringify(this.cliente));
     this._clienteService.save(this.cliente).then(() => {
       this.formulario.reset();
       this.messageService.add({
@@ -118,7 +119,6 @@ export class ClienteFormComponent implements OnInit {
     });
   }
   
-
  ngOnDestroy(): void {
   this._unsubscribeAll.next('');
   this._unsubscribeAll.complete();

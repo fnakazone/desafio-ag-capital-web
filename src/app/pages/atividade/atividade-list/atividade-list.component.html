@@ -1,7 +1,8 @@
 <br/>
 <div class="card shadow-2 pb-3 pl-3 pr-3" >
   <p-card header="Atividades">
-  <p-table [value]="listaAtividades" class="p-datatable-striped">
+  <p-table *ngIf="listaAtividades && listaAtividades.length > 0; else vazio"  
+           [value]="listaAtividades" class="p-datatable-striped">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 20%">Nome</th>
@@ -31,5 +32,8 @@
       </tr>
     </ng-template>
   </p-table>
+  <ng-template #vazio>
+    <p>Nenhuma atividade encontrada</p>
+  </ng-template>
 </p-card>
 </div>

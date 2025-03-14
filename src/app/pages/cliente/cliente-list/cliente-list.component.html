@@ -1,4 +1,5 @@
 <br/>
+<p-toast></p-toast>
 <div class="card shadow-2 pb-3 pl-3 pr-3" >
   <p-card header="Clientes">
   <p-table *ngIf="listaClientes && listaClientes.length > 0; else vazio"  
@@ -23,7 +24,7 @@
           <div class="action-buttons">
             <p-button icon="pi pi-eye" class="btn-visualizar p-button-rounded p-button-text p-button-primary" pTooltip="Visualizar" tooltipPosition="top" (click)="projetos(cliente)"></p-button>
             <p-button icon="pi pi-pencil" class="btn-editar p-button-rounded p-button-text p-button-warning" pTooltip="Editar" tooltipPosition="top" (click)="editar(cliente.id)"></p-button>
-            <p-button icon="pi pi-trash" class="btn-excluir p-button-rounded p-button-text p-button-danger" pTooltip="Excluir" tooltipPosition="top"></p-button>
+            <p-button icon="pi pi-trash" class="btn-excluir p-button-rounded p-button-text p-button-danger" pTooltip="Excluir" tooltipPosition="top" (click)="confirmacaoExclusao(cliente.id)"></p-button>
    
           </div>
         </td>
@@ -191,5 +192,41 @@
   </div>
   </form>  
   </p-card>
+</div>
+</p-dialog>
+
+
+<p-dialog
+  header="Confirmação"
+  [style]="{ width: '24%', height: '280px' }"
+  [(visible)]="dialogConfirmacaoExclusao"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <strong>Deseja realmente excluir o cliente?</strong>
+  </div>
+  <div class="p-toolbar-group-end"></div>
+</p-toolbar>
+Esta ação não poderá ser desfeita!
+
+<p-divider />
+<div class="col-12">
+  <div class="flex justify-content-between">
+    <p-button
+      label="Não"
+      class="br-button primary"
+      (click)="fecharDialogConfirmacaoExclusao()"
+    ></p-button>
+    <p-button
+      label="Sim"
+      icon="fa fa-clone"
+      class="br-button primary"
+      (click)="excluir()"
+    ></p-button>
+  </div>
 </div>
 </p-dialog>

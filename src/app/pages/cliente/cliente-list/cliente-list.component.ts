@@ -29,6 +29,8 @@ export class ClienteListComponent implements OnInit, OnDestroy {
 
   formularioAtividade!: FormGroup;
   public idProjeto: number = 0;
+  public dialogConfirmacaoExclusao = false;
+  public idClienteExclusao: number = 0;
 
   constructor(    
     private readonly _clienteService: ClienteService,
@@ -120,6 +122,28 @@ export class ClienteListComponent implements OnInit, OnDestroy {
       this.formularioAtividade.reset();
     }
   }  
+
+  confirmacaoExclusao(id: number){
+    this.idClienteExclusao = id;
+    this.dialogConfirmacaoExclusao=true;
+  }
+
+  async excluir(): Promise<void> {
+    try {
+      await this._clienteService.delete(this.idClienteExclusao);
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente excluído com sucesso!' });
+
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao excluir cluente!' });
+
+    }
+    this.getClientes();
+    this.dialogConfirmacaoExclusao=false;
+  }
+
+  fecharDialogConfirmacaoExclusao(){
+    this.dialogConfirmacaoExclusao=false;
+  }
 
   cancelarNovaAtividade(){
     this.formularioAtividade.reset();
